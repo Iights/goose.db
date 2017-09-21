@@ -6,7 +6,14 @@ module.exports = function(app, passport) {
     res.render('index', { title: 'Home' });
   })
 
+  app.get('/about', (req, res) => {
+    res.render('about', { title: 'About'})
+  })
+
   // User and Profile rendering handler
-  require('./user')(app, passport);
+  require('./users')(app, passport);
+
+  // Mod and modlist rendering handler
+  require('./mods')(app, passport);
 
 }
