@@ -9,38 +9,59 @@ module.exports = function(app, passport) {
     res.render('mods', { title: 'Modlist', message: req.flash('modlistMessage')});
   })
 
+  // Mod submission handling
   app.post('/mods/add', (req, res) => {
-    if(!req.user || req.user.rank < 3) {
-      req.flash('modlistMessage', 'You\'re not logged in or not allowed to submit mods.');
+    if(!req.user) {
+      req.flash('modlistMessage', 'You\'re not logged in.');
       res.redirect('/mods');
     } else {
-      model.Mod.find({ name: req.body.name }, (err, mods) => {
+      model.Rank.findOne( { id: req.user.rank }, (err, rank) => {
         if(err) throw err;
-        if(mods.length > 0) {
-          req.flash('modMessage', 'This module already exists in the database');
-          res.redirect('/mod/'+mods[0]._id);
-        } else {
-          var mod = new model.Mod();
-          mod.name = req.body.name;
-          mod.type = req.body.type;
-          mod.version = req.body.version;
-          mod.paid = (req.body.paid === 'true');
-          mod.author = {
-            name: req.user.username,
-            email: req.user.email,
-            discord: req.user.discord,
-            paypal: req.user.paypal || req.body.paypal
-          },
-          mod.image = req.body.image;
-          mod.body = req.body.readme;
-          mod.download = req.body.download;
-          mod.repository = req.body.repository;
-          mod.revision = (req.user.rank > 3 ? 1 : 0);
-          mod.tags = req.body.tags.trim().split(',');
+        if(!rank) res.redirect('/');
+        else {
+          if(rank.roles.indexOf('addMod') > -1) {
+            model.Mod.find({ name: req.body.name }, (err, mods) => {
+              if(err) throw err;
+              if(mods.length > 0) {
+                req.flash('modMessage', 'This module already exists in the database');
+                res.redirect('/mod/'+mods[0]._id);
+              } else {
+                var mod = new model.Mod();
+                mod.name = req.body.name;
+                mod.type = req.body.type;
+                mod.version = req.body.version;
+                mod.paid = (req.body.paid === 'true');
+                mod.author = {
+                  name: req.user.username,
+                  email: req.user.email,
+                  discord: req.user.discord,
+                  paypal: req.user.paypal || req.body.paypal
+                },
+                mod.image = req.body.image;
+                mod.body = req.body.readme;
+                mod.download = req.body.download;
+                mod.repository = req.body.repository;
+                mod.revision = rank.roles.indexOf('revMod') > -1 ? 1 : 0;
+                mod.tags = req.body.tags.trim().split(',');
+      
+                process.nextTick(() => mod.save((err) => {
+                  if(err) throw err;
+                  model.Mod.findOne( { name: mod.name }, (err, ret) => {
+                    if(err) throw err;
+                    if(ret.revision > 0)
+                      req.flash('modMessage', 'Your mod was submitted');
+                    else
+                      req.flash('modMessage', 'Your mod was submitted to the database and is waiting for approval/revision by the Moderators');
 
-          process.nextTick(() => mod.save((err) => {
-            if(err) throw err;
-          }))
+                    res.redirect('/mod/'+ret._id);
+                  })
+                }))
+              }
+            })
+          } else {
+            req.flash('modlistMessage', 'You\'re not allowed to submit modules, ask a Moderator for help.');
+            res.redirect('/mods');
+          }
         }
       })
     }

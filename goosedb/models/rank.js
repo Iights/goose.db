@@ -4,7 +4,7 @@ var rankSchema = mongoose.Schema({
   id: Number,
   name: String,
   color: String,
-  role: Number
+  roles: Array
 })
 
 module.exports = mongoose.model('Rank', rankSchema);
