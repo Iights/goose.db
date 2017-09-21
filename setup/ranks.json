@@ -1,0 +1,40 @@
+{
+  "0" : {
+    "id" : 0,
+    "name" : "Administrator",
+    "color" : "#CC0808",
+    "roles" : [
+      "adminAccess", "addMod", "revMod", "viewUnreviewed"
+    ]
+  },
+  "1" : {
+    "id" : 1,
+    "name" : "Moderator",
+    "color" : "#077C28",
+    "roles" : [
+      "addMod", "revMod", "viewUnreviewed"
+    ]
+  },
+  "2" : {
+    "id" : 2,
+    "name" : "Seller",
+    "color" : "#55077C",
+    "roles" : [
+      "addMod", "uploadPaid"
+    ]
+  },
+  "3" : {
+    "id" : 3,
+    "name" : "Developer",
+    "color" : "#07227C",
+    "roles" : [
+      "addMod"
+    ]
+  },
+  "4" : {
+    "id" : 4,
+    "name" : "User",
+    "color" : "#000000",
+    "roles" : []
+  }
+}

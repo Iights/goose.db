@@ -5,15 +5,20 @@ block vars
 
 block content
 
+  if message
+    p.return-message.text-center.text-warning= message
+
+  input.mod-search(type='text', onkeyup='searchMods();', placeholder='Search Mods...')
+
   ul.nav.nav-pills.pull-right
     li.nav-item
-      a(href='?s=all', class=((!query.s || query.s === 'all') ? 'nav-link active' : 'nav-link')) All
+      a(href='?t=all', class=((!query.t || query.t === 'all') ? 'nav-link active' : 'nav-link')) All
     li.nav-item
-      a(href='?s=proxy', class=(query && query.s === 'proxy' ? 'nav-link active' : 'nav-link')) Proxy
+      a(href='?t=proxy', class=(query && query.t === 'proxy' ? 'nav-link active' : 'nav-link')) Proxy
     li.nav-item
-      a(href='?s=ui', class=(query && query.s === 'ui' ? 'nav-link active' : 'nav-link')) UI
+      a(href='?t=ui', class=(query && query.t === 'ui' ? 'nav-link active' : 'nav-link')) UI
     li.nav-item
-      a(href='?s=costume', class=(query && query.s === 'costume' ? 'nav-link active' : 'nav-link')) Costume
+      a(href='?t=costume', class=(query && query.t === 'costume' ? 'nav-link active' : 'nav-link')) Costume
 
   table.table.table-hover.mod-list
     thead

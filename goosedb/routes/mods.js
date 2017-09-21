@@ -6,12 +6,25 @@ module.exports = function(app, passport) {
   // TODO Sorting
   // Modlist render handling
   app.get('/mods', (req, res) => {
-    model.Mod.find({ $where: function() {
-      return this.revision > 0;
-    }}, (err, mods) => {
-      if(err) throw err;
-      res.render('mods', { title: 'Modlist', message: req.flash('modlistMessage'), query: req.query, list: mods });
-    })
+    let options = {
+      revision: { $gt: 0 }
+    };
+
+    if(req.query.t && req.query.t !== 'all') 
+      options['$where'] = "this.type.toLowerCase() === '" + req.query.t + "'";
+
+    if(req.user) {
+      model.Rank.findOne({ id: req.user.rank }, (err, rank) => {
+        if(err) throw err;
+        if(rank.roles.indexOf('viewUnreviewed') > -1) delete options['revision'];
+      })
+    }
+      process.nextTick(() => {
+        model.Mod.find(options, (err, list) => {
+          if(err) throw err;
+          res.render('mods', { title: 'Modlist', list: list, message: req.flash('modlistMessage'), query: req.query})
+        })
+      })
   })
 
   // Mod submission handling
