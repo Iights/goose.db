@@ -1,0 +1,38 @@
+.content {
+  padding-top: 90px;
+}
+
+.content > .nav-pills {
+  margin-bottom: 20px;
+}
+
+table.mod-list {
+  border: 1px solid #ddd;
+  font-size: 14px;
+}
+
+table.mod-list thead th {
+  position: relative;
+  background-image: none !important;
+}
+
+table.mod-list tbody tr td {
+  vertical-align: middle;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 603px;
+}
+
+table.mod-list > tbody > tr:nth-child(odd) {
+  background: rgba(0,0,0,.025);
+}
+
+table.mod-list > tbody > tr:nth-child(odd):hover {
+  background: rgba(0,0,0,.06);
+}
+
+table.mod-list tbody tr td a {
+  text-decoration: none;
+}
+

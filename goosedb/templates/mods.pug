@@ -4,3 +4,45 @@ block vars
   - var page = 'mods'
 
 block content
+
+  ul.nav.nav-pills.pull-right
+    li.nav-item
+      a(href='?s=all', class=((!query.s || query.s === 'all') ? 'nav-link active' : 'nav-link')) All
+    li.nav-item
+      a(href='?s=proxy', class=(query && query.s === 'proxy' ? 'nav-link active' : 'nav-link')) Proxy
+    li.nav-item
+      a(href='?s=ui', class=(query && query.s === 'ui' ? 'nav-link active' : 'nav-link')) UI
+    li.nav-item
+      a(href='?s=costume', class=(query && query.s === 'costume' ? 'nav-link active' : 'nav-link')) Costume
+
+  table.table.table-hover.mod-list
+    thead
+      tr
+        th Mod Name
+        th Type
+        th Version
+        th Author
+        th Repository
+        th Download
+    tbody
+      tr
+        td fps-utils
+        td Proxy
+        td 2.1a-indev
+        td Saegusa
+        td test
+        td test
+      tr
+        td fps-utils
+        td Proxy
+        td 2.1a-indev
+        td Saegusa
+        td test
+        td test
+      tr
+        td fps-utils
+        td Proxy
+        td 2.1a-indev
+        td Saegusa
+        td test
+        td test

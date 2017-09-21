@@ -6,7 +6,7 @@ module.exports = function(app, passport) {
   // TODO Sorting
   // Modlist render handling
   app.get('/mods', (req, res) => {
-    res.render('mods', { title: 'Modlist', message: req.flash('modlistMessage')});
+    res.render('mods', { title: 'Modlist', message: req.flash('modlistMessage'), query: req.query });
   })
 
   // Mod submission handling
@@ -48,11 +48,12 @@ module.exports = function(app, passport) {
                   if(err) throw err;
                   model.Mod.findOne( { name: mod.name }, (err, ret) => {
                     if(err) throw err;
-                    if(ret.revision > 0)
+                    if(ret.revision > 0) {
                       req.flash('modMessage', 'Your mod was submitted');
-                    else
+                    } 
+                    else {
                       req.flash('modMessage', 'Your mod was submitted to the database and is waiting for approval/revision by the Moderators');
-
+                    }
                     res.redirect('/mod/'+ret._id);
                   })
                 }))

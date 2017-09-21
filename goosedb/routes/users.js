@@ -3,7 +3,9 @@ var model = require('../models');
 module.exports = function(app, passport) {
 
   app.get('/login', (req, res) => {
-
+    if(req.user) res.redirect('/');
+    else
+      res.render('login', { title: 'Login', message: req.flash('loginMessage')});
   })
 
   app.post('/login', passport.authenticate('login', {
