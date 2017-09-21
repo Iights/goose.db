@@ -1,0 +1,16 @@
+{
+  "name": "goose.db",
+  "version": "1.0.0",
+  "description": "Goose.db final revision for release",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "goose",
+    "database",
+    "swag"
+  ],
+  "author": "Saegusa",
+  "license": "ISC"
+}
