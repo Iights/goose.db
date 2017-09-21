@@ -6,7 +6,12 @@ module.exports = function(app, passport) {
   // TODO Sorting
   // Modlist render handling
   app.get('/mods', (req, res) => {
-    res.render('mods', { title: 'Modlist', message: req.flash('modlistMessage'), query: req.query });
+    model.Mod.find({ $where: function() {
+      return this.revision > 0;
+    }}, (err, mods) => {
+      if(err) throw err;
+      res.render('mods', { title: 'Modlist', message: req.flash('modlistMessage'), query: req.query, list: mods });
+    })
   })
 
   // Mod submission handling
@@ -32,6 +37,7 @@ module.exports = function(app, passport) {
                 mod.version = req.body.version;
                 mod.paid = (req.body.paid === 'true');
                 mod.author = {
+                  id: req.user._id,
                   name: req.user.username,
                   email: req.user.email,
                   discord: req.user.discord,

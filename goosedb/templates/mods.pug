@@ -25,24 +25,17 @@ block content
         th Repository
         th Download
     tbody
-      tr
-        td fps-utils
-        td Proxy
-        td 2.1a-indev
-        td Saegusa
-        td test
-        td test
-      tr
-        td fps-utils
-        td Proxy
-        td 2.1a-indev
-        td Saegusa
-        td test
-        td test
-      tr
-        td fps-utils
-        td Proxy
-        td 2.1a-indev
-        td Saegusa
-        td test
-        td test
+      each mod in list
+        tr
+          td
+            a(href='/mod/'+mod._id)= mod.name
+          td
+            a.mod-type(href='?s='+mod.type.toLowerCase())= mod.type
+          td= mod.version
+          td
+            a.mod-author(href='/user/'+mod.author.id)= mod.author.name
+          td
+            a.mod-repo(href= mod.repository)= mod.repository
+          td
+            a.mod-download(href= mod.download)
+              i.fa.fa-cloud-download

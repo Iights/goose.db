@@ -36,3 +36,9 @@ table.mod-list tbody tr td a {
   text-decoration: none;
 }
 
+a.mod-download i {
+  display: inline-block;
+  width: 100%;
+  padding-left: 20px;
+}
+

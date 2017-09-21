@@ -12,7 +12,9 @@ var express = require('express'),
 var dbConfig = require('./config/database'),
   authConfig = require('./config/auth');
 
-//mongoose.connect(dbConfig.url);
+var model = require('./goosedb/models');
+
+mongoose.connect(dbConfig.url);
 
 app.use(morgan('dev'));
 app.use(cookieParser());

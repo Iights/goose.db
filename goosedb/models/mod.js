@@ -2,10 +2,11 @@ var mongoose = require('mongoose');
 
 var modSchema = mongoose.Schema({
   name: String,
-  type: Number,
+  type: String,
   version: String,
   paid: Boolean,
   author: {
+    id: String,
     name: String,
     email: String,
     discord: String,
