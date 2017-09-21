@@ -4,7 +4,7 @@
     "name" : "Administrator",
     "color" : "#CC0808",
     "roles" : [
-      "adminAccess", "addMod", "revMod", "viewUnreviewed"
+      "adminAccess", "addMod", "revMod", "viewUnreviewed", "sendMessage"
     ]
   },
   "1" : {
@@ -12,7 +12,7 @@
     "name" : "Moderator",
     "color" : "#077C28",
     "roles" : [
-      "addMod", "revMod", "viewUnreviewed"
+      "addMod", "revMod", "viewUnreviewed", "sendMessage", "reportBug"
     ]
   },
   "2" : {
@@ -20,7 +20,7 @@
     "name" : "Seller",
     "color" : "#55077C",
     "roles" : [
-      "addMod", "uploadPaid"
+      "addMod", "uploadPaid", "reportBug"
     ]
   },
   "3" : {
@@ -28,13 +28,13 @@
     "name" : "Developer",
     "color" : "#07227C",
     "roles" : [
-      "addMod"
+      "addMod", "reportBug"
     ]
   },
   "4" : {
     "id" : 4,
     "name" : "User",
     "color" : "#000000",
-    "roles" : []
+    "roles" : ["reportBug"]
   }
 }
