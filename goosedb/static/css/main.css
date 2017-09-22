@@ -42,6 +42,10 @@
   color: #A00;
 }
 
+.status-away {
+  color: #AA0;
+}
+
 table.mod-list {
   border: 1px solid #ddd;
   font-size: 14px;
@@ -150,4 +154,3 @@ a.mod-download i {
   margin: 0 auto;
   text-align: center;
 }
-

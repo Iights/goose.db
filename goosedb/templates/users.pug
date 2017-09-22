@@ -29,7 +29,15 @@ block content
               td= usr.discord
               td
                 a.repo-link-github(href= usr.repository)= usr.repository
-              td.status-online Online
+              case usr.status
+                when 0
+                  td.status-offline Offline
+                when 1
+                  td.status-online Online
+                when 2
+                  td.status-away Online
+                default
+                  td.status-offline Offline
     hr
     h2 Users
     br
@@ -55,6 +63,14 @@ block content
                 a.fav-link(href='/user/'+usr._id+'/fav')= '/user/'+usr.username+'/fav'
               td
                 a.list-link(href='/user/'+usr._id+'/lists')= '/user/'+usr.username+'/lists'
-              td.status-offline Offline
+              case usr.status
+                when 0
+                  td.status-offline Offline
+                when 1
+                  td.status-online Online
+                when 2
+                  td.status-away Online
+                default
+                  td.status-offline Offline
     hr
     p.text-center.text-muted= 'Total Users: ' + list.length

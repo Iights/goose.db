@@ -1,3 +1,5 @@
+## Current roles
+
 Name | Description
 ---|---
 adminAccess | Access to administration panel.
@@ -7,3 +9,9 @@ revMod | User is able to review and approve modules submitted to the page
 viewUnreviewed | User is able to view the unreviewed mods in their modlist page.
 sendMessage | User is able to send messages to other users. (Usually used for notices etc...)
 reportBug | User has the option to report issues, may be disabled later.
+
+## Todo: add
+
+Name | Description
+---|---
+appearOffline | User is able to toggle appear offline mode.
