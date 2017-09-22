@@ -117,16 +117,18 @@ a.mod-download i {
   margin-bottom: 12px;
 }
 
-#login-form > .input-group {
-  margin: 0 auto;
-  width: 75%;
-  padding-bottom: 10px;
-}
-
+#login-form > .input-group,
 #login-form > .form-group {
   width: 75%;
   margin: 0 auto;
   text-align: center;
+}
+
+#mod-form > .input-group,
+#mod-form > .form-group {
+  width: 75%;
+  margin: 0 auto;
+  padding-bottom: 10px;
 }
 
 #login-form .input-group > input::-webkit-input-placeholder {

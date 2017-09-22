@@ -1,6 +1,6 @@
 var model = require('../models');
 
-module.exports = function(app, passport) {
+module.exports = function(app, passport, ranks) {
 
   /*
   app.get('/login', (req, res) => {
@@ -39,17 +39,11 @@ module.exports = function(app, passport) {
   })
 
   app.get('/users', (req, res) => {
-
-    model.Rank.find({}, (err, ranks) => {
+    model.User.find({}, (err, users) => {
       if(err) throw err;
-      model.User.find({}, (err, users) => {
-        if(err) throw err;
-        res.render('users', { title: 'Userlist', message: req.flash('userlistMessage'), list: users.sort((a, b) => {
-          return a.rank - b.rank;
-        }), ranks: ranks.sort((a, b) => {
-          return a.id - b.id;
-        }), user: req.user })
-      })
+      res.render('users', { title: 'Userlist', message: req.flash('userlistMessage'), list: users.sort((a, b) => {
+        return a.rank - b.rank;
+      }), ranks: ranks, user: req.user })
     })
   })
 

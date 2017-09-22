@@ -10,8 +10,7 @@ var express = require('express'),
   session = require('express-session');
 
 var dbConfig = require('./config/database'),
-  authConfig = require('./config/auth'),
-  ranksConfig = require('./setup/ranks.json');
+  authConfig = require('./config/auth');
 
 var model = require('./goosedb/models');
 

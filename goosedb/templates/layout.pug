@@ -42,10 +42,15 @@ html
                 a.nav-link(href='/register') Register
           else
             ul.nav.navbar-nav.ml-auto
-              li.nav-item(class=(page === 'profile' ? 'active' : ''))
-                a.nav-link= user.username
+              li.nav-item.dropdown(class=(page === 'profile' ? 'active' : ''))
+                a.nav-link.dropdown-toggle(data-toggle='dropdown')= user.username
+                  span.caret
+                .dropdown-menu
+                  a.dropdown-item()
     if !user
       include addon_login
+    else
+      if ranks[user.rank].roles.indexOf('addMod') > -1
 
     .container.content
       block content

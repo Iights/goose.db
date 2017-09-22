@@ -1,19 +1,22 @@
 var model = require('../models');
 
 module.exports = function(app, passport) {
+
+  var ranks = require('../../setup/ranks.json');
+
   // Main page rendering handler
   app.get('/', (req, res) => {
-    res.render('index', { title: 'Home', user: req.user });
+    res.render('index', { title: 'Home', ranks: ranks, user: req.user });
   })
 
   app.get('/about', (req, res) => {
-    res.render('about', { title: 'About', user: req.user})
+    res.render('about', { title: 'About', ranks: ranks, user: req.user})
   })
 
   // User and Profile rendering handler
-  require('./users')(app, passport);
+  require('./users')(app, passport, ranks);
 
   // Mod and modlist rendering handler
-  require('./mods')(app, passport);
+  require('./mods')(app, passport, ranks);
 
 }

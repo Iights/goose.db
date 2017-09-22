@@ -1,0 +1,59 @@
+#mod-modal.modal.fade(tabindex='-1', role='dialog', aria-labelledby="modModal", aria-hidden="true")
+  .modal-dialog(role='document')
+    .modal-content
+      .modal-header
+        h5.modal-title Add Module
+        button.close(type='button', data-dismiss='modal')
+          span(aria-hidden='true') &times;
+      .modal-body
+        form#mod-form(action="/mods/add", method='POST', style='margin: 0 auto; width: 75%;')
+          .input-group(style='margin: 0 auto;')
+            label.radio-inline
+              input(type='radio', name='paid', value='false', checked)
+              | Free
+            label.radio-inline
+              input(type='radio', name='paid', value='true')
+              | Paid
+          .input-group
+            span.input-group-addon
+              i.fa.fa-bookmark(style='heigth: 12px; width: 12px;')
+            input.form-control(type='text', name='modName', placeholder='Module Name', required)
+          .input-group
+            span.input-group-addon
+              i.fa.fa-code-fork(style='heigth: 12px; width: 12px;')
+            input.form-control(type='text', name='modVersion', placeholder='Version', required)
+          .input-group
+            span.input-group-addon
+              i.fa.fa-github(style='heigth: 12px; width: 12px;')
+            input.form-control(type='text', name='modRepo', placeholder='Repository', required)
+          .input-group
+            span.input-group-addon
+              i.fa.fa-picture-o(style='heigth: 12px; width: 12px;')
+            input.form-control(type='text', name='modImage', placeholder='Module Image')
+          .input-group
+            span.input-group-addon
+              i.fa.fa-file-text(style='heigth: 12px; width: 12px;')
+            input.form-control(type='text', name='modReadme', placeholder='Optional Readme')
+          .input-group
+            span.input-group-addon
+              i.fa.fa-cloud-download(style='heigth: 12px; width: 12px;')
+            input.form-control(type='text', name='modDownload', placeholder='Optional Download Link')
+          .input-group
+            span.input-group-addon
+              i.fa.fa-tags(style='heigth: 12px; width: 12px;')
+            input.form-control(type='text', name='modTags', placeholder='Tags (separate with a comma)')
+          .input-group(style='margin: 0 auto;')
+            label.radio-inline
+              input(type='radio', name='modType', value='Proxy')
+              | Proxy
+            label.radio-inline
+              input(type='radio', name='modType', value='UI')
+              | UI
+            label.radio-inline
+              input(type='radio', name='modType', value='Costume')
+              | Costume
+            label.radio-inline
+              input(type='radio', name='modType', value='None', checked)
+              | None
+      .modal-footer.text-center.figure-caption.text-muted
+        span Goosedb, TERA mods database, created by Saegusa 2017.
