@@ -34,6 +34,24 @@
   padding-right: 6px;
 }
 
+.email-link:before {
+  font-family: FontAwesome;
+  content: '\f0e0';
+  padding-right: 6px;
+}
+
+.rank-link:before {
+  font-family: FontAwesome;
+  content: '\f0c0';
+  padding-right: 6px;
+}
+
+.discord-link:before {
+  font-family: FontAwesome;
+  content: '\f086';
+  padding-right: 6px;
+}
+
 .status-online {
   color: #0A0;
 }
@@ -121,18 +139,35 @@ a.mod-download i {
 #login-form > .form-group {
   width: 75%;
   margin: 0 auto;
-  text-align: center;
+  padding-bottom: 10px;
 }
 
 #mod-form > .input-group,
 #mod-form > .form-group {
   width: 75%;
   margin: 0 auto;
-  padding-bottom: 10px;
+  padding-bottom: 12px;
 }
 
-#login-form .input-group > input::-webkit-input-placeholder {
+#login-form .input-group > input::-webkit-input-placeholder,
+#mod-form .input-group > input::-webkit-input-placeholder {
   color: rgba(0,0,0,.5);
+}
+
+.selector-group {
+  margin: 0 auto;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.selector-group > .form-check-inline:first-of-type {
+  margin: 0 auto;
+  padding-left: 0;
+}
+
+.selector-group > .form-check-inline {
+  margin: 0 auto;
+  padding-left: 5px;
 }
 
 .register-card {
@@ -155,4 +190,21 @@ a.mod-download i {
   width: 75%;
   margin: 0 auto;
   text-align: center;
+}
+
+.dd-icon {
+  padding-right: 6px;
+  margin-right: 6px;
+}
+
+.profile-image {
+  max-width: 250px;
+  max-height: 300px;
+  overflow: hidden;
+  border-bottom: 1px solid #ddd;
+}
+
+.col-scroll {
+  height: 90vh;
+  overflow-y: scroll;
 }

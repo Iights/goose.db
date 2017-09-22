@@ -7,53 +7,63 @@
           span(aria-hidden='true') &times;
       .modal-body
         form#mod-form(action="/mods/add", method='POST', style='margin: 0 auto; width: 75%;')
-          .input-group(style='margin: 0 auto;')
-            label.radio-inline
-              input(type='radio', name='paid', value='false', checked)
-              | Free
-            label.radio-inline
-              input(type='radio', name='paid', value='true')
-              | Paid
+          .input-group.selector-group
+            .form-check.form-check-inline
+              label.form-check-label
+                input.form-check-input(type='radio', name='paid', value='false', checked)
+                | Free
+            .form-check.form-check-inline
+              label.form-check-label
+                input.form-check-input(type='radio', name='paid', value='true')
+                | Paid
           .input-group
             span.input-group-addon
               i.fa.fa-bookmark(style='heigth: 12px; width: 12px;')
-            input.form-control(type='text', name='modName', placeholder='Module Name', required)
+            input.form-control(type='text', name='name', placeholder='Module Name', required)
           .input-group
             span.input-group-addon
               i.fa.fa-code-fork(style='heigth: 12px; width: 12px;')
-            input.form-control(type='text', name='modVersion', placeholder='Version', required)
+            input.form-control(type='text', name='version', placeholder='Version', required)
           .input-group
             span.input-group-addon
               i.fa.fa-github(style='heigth: 12px; width: 12px;')
-            input.form-control(type='text', name='modRepo', placeholder='Repository', required)
+            input.form-control(type='text', name='repository', placeholder='Repository', required)
           .input-group
             span.input-group-addon
               i.fa.fa-picture-o(style='heigth: 12px; width: 12px;')
-            input.form-control(type='text', name='modImage', placeholder='Module Image')
+            input.form-control(type='text', name='image', placeholder='Module Image')
           .input-group
             span.input-group-addon
               i.fa.fa-file-text(style='heigth: 12px; width: 12px;')
-            input.form-control(type='text', name='modReadme', placeholder='Optional Readme')
+            input.form-control(type='text', name='readme', placeholder='Optional Readme')
           .input-group
             span.input-group-addon
               i.fa.fa-cloud-download(style='heigth: 12px; width: 12px;')
-            input.form-control(type='text', name='modDownload', placeholder='Optional Download Link')
+            input.form-control(type='text', name='download', placeholder='Optional Download Link')
           .input-group
             span.input-group-addon
               i.fa.fa-tags(style='heigth: 12px; width: 12px;')
-            input.form-control(type='text', name='modTags', placeholder='Tags (separate with a comma)')
-          .input-group(style='margin: 0 auto;')
-            label.radio-inline
-              input(type='radio', name='modType', value='Proxy')
-              | Proxy
-            label.radio-inline
-              input(type='radio', name='modType', value='UI')
-              | UI
-            label.radio-inline
-              input(type='radio', name='modType', value='Costume')
-              | Costume
-            label.radio-inline
-              input(type='radio', name='modType', value='None', checked)
-              | None
+            input.form-control(type='text', name='tags', placeholder='Tags (separate with a comma)')
+          .input-group.selector-group
+            .form-check.form-check-inline
+              label.form-check-label
+                input.form-check-input(type='radio', name='type', value='Proxy')
+                | Proxy
+            .form-check.form-check-inline
+              label.form-check-label
+                input.form-check-input(type='radio', name='type', value='UI')
+                | UI
+            .form-check.form-check-inline
+              label.form-check-label
+                input.form-check-input(type='radio', name='type', value='Costume')
+                | Costume
+            .form-check.form-check-inline
+              label.form-check-label
+                input.form-check-input(type='radio', name='type', value='None', checked)
+                | None
+          .form-group
+            button.btn.btn-block.btn-primary.text-center(type='submit', style='cursor: pointer; margin-top: 10px;')
+              i.fa.fa-sign-in(style='padding-right: 5px;;')
+              | Submit
       .modal-footer.text-center.figure-caption.text-muted
         span Goosedb, TERA mods database, created by Saegusa 2017.

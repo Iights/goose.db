@@ -1,9 +1,34 @@
 extends layout
 
 block vars
-  - var page = 'user'
+  if user
+    - var page = (user.username === render.username ? 'profile' : 'user')
+  else
+    - var page = 'user'
 
 block content
-  span= render
-  hr
-  span= user ? user : ''
+  .row
+    .col-3
+      .card.rounded
+        img.card-image-top.profile-image(src= render.image)
+        .card-block
+          h2.card-title= render.username
+          p.card-text= render.bio
+        ul.list-group.list-group-flush
+          li.list-group-item.rank-link(style='color:'+ranks[render.rank].color+';')= ranks[render.rank].name
+          if render.rank < 4
+            li.list-group-item 
+              a.email-link(href='mailto://'+render.email)= render.email
+          li.list-group-item
+            a.discord-link(href='https://discord.gg/xhH7KEm')= render.discord
+          li.list-group-item
+            case render.status
+              when 1
+                span.status-online Online
+              when 2
+                span.status-away Away
+              default
+                span.status-offline Offline
+    .col-12.col-md-auto
+      span This place is WIP for user favorites and lists to be added later on.
+          

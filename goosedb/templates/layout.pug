@@ -7,12 +7,14 @@ html
       link(rel='stylesheet', href='/css/main.css')
       link(rel='stylesheet', href='/css/bootstrap.min.css')
       link(rel='stylesheet', href='/css/font-awesome.min.css')
+      link(rel='stylesheet', href='/css/tether.min.css')
       block userStyles
 
     block scripts
       script(src='/js/jquery-3.2.1.min.js')
       script(src='/js/popper.min.js')
       script(src='/js/bootstrap.min.js')
+      script(src='/js/tether.min.js')
       block userScripts
 
     block vars
@@ -43,14 +45,37 @@ html
           else
             ul.nav.navbar-nav.ml-auto
               li.nav-item.dropdown(class=(page === 'profile' ? 'active' : ''))
-                a.nav-link.dropdown-toggle(data-toggle='dropdown')= user.username
+                a.nav-link.dropdown-toggle(data-toggle='dropdown', style='cursor: pointer;')= user.username
                   span.caret
                 .dropdown-menu
-                  a.dropdown-item()
+                  if ranks && ranks[user.rank].roles.indexOf('addMod') > -1
+                    a.dropdown-item(href='#', data-toggle='modal', data-target='#mod-modal')
+                      i.fa.fa-plus.fa-fw.dd-icon
+                      | Add Mod
+                  if ranks && ranks[user.rank].roles.indexOf('reportBug') > -1
+                    a.dropdown-item(href='#', data-toggle='modal', data-target='#bug-modal')
+                      i.fa.fa-bug.fa-fw.dd-icon
+                      | Report an Issue
+                  .dropdown-divider
+                  a.dropdown-item(href='/profile')
+                    i.fa.fa-user.fa-fw.dd-icon
+                    | Profile
+                  if ranks && ranks[user.rank].roles.indexOf('adminAccess') > -1
+                    a.dropdown-item(href='/admin')
+                      i.fa.fa-bar-chart.fa-fw.dd-icon
+                      | Admin Panel
+                  a.dropdown-item(href='/profile')
+                    i.fa.fa-cog.dd-icon
+                    | Settings
+                  .dropdown-divider
+                  a.dropdown-item(href='/logout')
+                    i.fa.fa-sign-out.fa-fw.dd-icon
+                    | Logout
     if !user
       include addon_login
     else
-      if ranks[user.rank].roles.indexOf('addMod') > -1
+      if ranks && ranks[user.rank].roles.indexOf('addMod') > -1
+        include addon_mod
 
     .container.content
       block content

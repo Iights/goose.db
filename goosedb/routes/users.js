@@ -48,7 +48,7 @@ module.exports = function(app, passport, ranks) {
   })
 
   app.get('/profile', isLoggedIn, (req, res) => {
-    res.render('user', { title: req.user.username, render: req.user, message: req.flash('profileMessage'), user: req.user});
+    res.render('user', { title: req.user.username, render: req.user, message: req.flash('profileMessage'), user: req.user, ranks: ranks});
   })
 
   app.get('/user', (req, res) => {
@@ -62,7 +62,7 @@ module.exports = function(app, passport, ranks) {
         req.flash('userlistMessage', 'Requested user could not be found or is banned.');
         res.redirect('/users');
       } else
-        res.render('user', { title: user.username, render: user, message: req.flash('userMessage'), user: req.user });
+        res.render('user', { title: user.username, render: user, message: req.flash('userMessage'), user: req.user, ranks: ranks });
     })
   })
 
