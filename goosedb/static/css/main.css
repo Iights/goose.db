@@ -10,6 +10,38 @@
   font-size: 16px;
 }
 
+.repo-link-github:before {
+  font-family: FontAwesome;
+  content: '\f092';
+  padding-right: 4px;
+}
+
+.repo-link-bitbucket:before {
+  font-family: FontAwesome;
+  content: '\f172';
+  padding-right: 4px;
+}
+
+.fav-link:before {
+  font-family: FontAwesome;
+  content: '\f005';
+  padding-right: 6px;
+}
+
+.list-link:before {
+  font-family: FontAwesome;
+  content: '\f0ca';
+  padding-right: 6px;
+}
+
+.status-online {
+  color: #0A0;
+}
+
+.status-offline {
+  color: #A00;
+}
+
 table.mod-list {
   border: 1px solid #ddd;
   font-size: 14px;
@@ -41,12 +73,14 @@ table.mod-list tbody tr td a {
   text-decoration: none;
 }
 
-table.table-staff {
+table.table-staff,
+table.table-user {
   border: 1px solid #ddd;
   font-size: 14px;
 }
 
-table.table-staff td {
+table.table-staff td,
+table.table-user td {
   vertical-align: middle;
   white-space: nowrap;
   overflow: hidden;
@@ -54,7 +88,8 @@ table.table-staff td {
   max-width: 600px;
 }
 
-table.table-staff > thead > tr > th {
+table.table-staff th,
+table.table-user th {
   position: relative;
   background-image: none !important;
   font-weight: bold;

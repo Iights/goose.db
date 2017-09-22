@@ -29,10 +29,13 @@ module.exports = function(app, passport) {
     failureFlash: true
   }))
 
-  app.get('/logout', (req, res) => {
-    req.logout();
-    req.flash('modlistMessage', 'Logged out successfully.');
-    res.redirect('/mods');
+  app.get('/logout', isLoggedIn, (req, res) => {
+    model.User.findByIdAndUpdate(req.user._id, { lastOnline: new Date(Date.now()), status: 0 }, (err, user) => {
+      if(err) throw err;
+      req.logout();
+      req.flash('modlistMessage', 'Logged out successfully.');
+      res.redirect('/mods');
+    })
   })
 
   app.get('/users', (req, res) => {
@@ -43,7 +46,9 @@ module.exports = function(app, passport) {
         if(err) throw err;
         res.render('users', { title: 'Userlist', message: req.flash('userlistMessage'), list: users.sort((a, b) => {
           return a.rank - b.rank;
-        }), ranks: ranks, user: req.user })
+        }), ranks: ranks.sort((a, b) => {
+          return a.id - b.id;
+        }), user: req.user })
       })
     })
   })

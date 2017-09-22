@@ -8,6 +8,7 @@ var userSchema = mongoose.Schema({
   discord: String,
   joinDate: Date,
   lastOnline: Date,
+  status: Number,
   rank: Number,
   bio: String,
   image: String,

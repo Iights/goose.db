@@ -5,6 +5,8 @@ block vars
 
 block content
   .container
+    h2 Staff Members
+    br
     table.table.table-striped.table-hover.table-staff
       thead
         tr
@@ -26,5 +28,33 @@ block content
                 a(href='mailto://'+usr.email)= usr.email
               td= usr.discord
               td
-                a(href= usr.repository)= usr.repository
-
+                a.repo-link-github(href= usr.repository)= usr.repository
+              td.status-online Online
+    hr
+    h2 Users
+    br
+    table.table.table-striped.table-hover.table-user
+      thead
+        tr
+          th Name
+          th Rank
+          th Discord
+          th Favorites
+          th Lists
+          th Status
+      tbody
+        each usr in list
+          if usr.rank > 3
+            tr
+              td
+                a(href='/user/'+usr._id)= usr.username
+              td
+                span(style='color: '+ranks[usr.rank].color+';')= ranks[usr.rank].name
+              td= usr.discord
+              td
+                a.fav-link(href='/user/'+usr._id+'/fav')= '/user/'+usr.username+'/fav'
+              td
+                a.list-link(href='/user/'+usr._id+'/lists')= '/user/'+usr.username+'/lists'
+              td.status-offline Offline
+    hr
+    p.text-center.text-muted= 'Total Users: ' + list.length
