@@ -1,7 +1,9 @@
 extends layout
 
 block vars
-  - var page = (render.username == user.username ? 'profile' : 'user')
+  - var page = 'user'
 
 block content
-  span= user
+  span= render
+  hr
+  span= user ? user : ''

@@ -36,7 +36,16 @@ module.exports = function(app, passport) {
   })
 
   app.get('/users', (req, res) => {
-    res.render('users', { title: 'Userlist', message: req.flash('userlistMessage'), user: req.user });
+
+    model.Rank.find({}, (err, ranks) => {
+      if(err) throw err;
+      model.User.find({}, (err, users) => {
+        if(err) throw err;
+        res.render('users', { title: 'Userlist', message: req.flash('userlistMessage'), list: users.sort((a, b) => {
+          return a.rank - b.rank;
+        }), ranks: ranks, user: req.user })
+      })
+    })
   })
 
   app.get('/profile', isLoggedIn, (req, res) => {
@@ -49,7 +58,7 @@ module.exports = function(app, passport) {
   })
 
   app.get('/user/:uid', (req, res) => {
-    model.User.findOne({ _id: req.params.uid }, { password: 0 }, (err, user) => {
+    model.User.findById(req.params.uid, { password: 0 }, (err, user) => {
       if(err || !user) {
         req.flash('userlistMessage', 'Requested user could not be found or is banned.');
         res.redirect('/users');

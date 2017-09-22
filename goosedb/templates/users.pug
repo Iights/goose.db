@@ -4,3 +4,27 @@ block vars
   - var page = 'users'
 
 block content
+  .container
+    table.table.table-striped.table-hover.table-staff
+      thead
+        tr
+          th Name
+          th Rank
+          th Email
+          th Discord
+          th Repository
+          th Status
+      tbody
+        each usr in list
+          if usr.rank < 4
+            tr
+              td
+                a(href='/user/'+usr._id)= usr.username
+              td
+                span(style='color: '+ranks[usr.rank].color+';')= ranks[usr.rank].name
+              td
+                a(href='mailto://'+usr.email)= usr.email
+              td= usr.discord
+              td
+                a(href= usr.repository)= usr.repository
+
