@@ -22,7 +22,7 @@ module.exports = function(app, passport) {
       process.nextTick(() => {
         model.Mod.find(options, (err, list) => {
           if(err) throw err;
-          res.render('mods', { title: 'Modlist', list: list, message: req.flash('modlistMessage'), query: req.query})
+          res.render('mods', { title: 'Modlist', list: list, message: req.flash('modlistMessage'), query: req.query, user: req.user})
         })
       })
   })
@@ -102,7 +102,7 @@ module.exports = function(app, passport) {
           req.flash('modlistMessage', 'This mod is currently under revision or recently submitted, please contact a Moderator if you think this is an error.');
           res.redirect('/mods');
         } else {
-          res.render('mod', { title: mod.name, mod: mod, message: req.flash('modMessage') });
+          res.render('mod', { title: mod.name, mod: mod, message: req.flash('modMessage'), user: req.user });
         }
       }
     })

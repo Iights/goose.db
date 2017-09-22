@@ -17,24 +17,7 @@ var model = require('./goosedb/models');
 
 mongoose.connect(dbConfig.url);
 
-// TODO move setup and db stuff to external files.
-/*
-model.Rank.find({}, (err, data) => {
-  if(err) throw err;
-  for(let rank in ranksConfig) {
-    if(!(ranksConfig[rank] in data)) {
-      var rnk = model.Rank();
-      rnk.id = ranksConfig[rank].id;
-      rnk.name = ranksConfig[rank].name;
-      rnk.color = ranksConfig[rank].color;
-      rnk.roles = ranksConfig[rank].roles;
-
-      rnk.save((err) => { if(err) throw err; });
-    }
-
-  }
-});
-*/
+require('./config/passport')(passport)
 
 app.use(morgan('dev'));
 app.use(cookieParser());

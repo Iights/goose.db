@@ -51,10 +51,49 @@ a.mod-download i {
   background-image: url('/img/goose.png');
   background-position: 10px 12px;
   background-repeat: no-repeat;
+  background-size: 24px 24px;
   width: 100%;
   font-size: 16px;
-  padding: 12px 20px 12px 40px;
+  padding: 12px 20px 12px 46px;
   border: 1px solid #ddd;
   margin-bottom: 12px;
+}
+
+#login-form > .input-group {
+  margin: 0 auto;
+  width: 75%;
+  padding-bottom: 10px;
+}
+
+#login-form > .form-group {
+  width: 75%;
+  margin: 0 auto;
+  text-align: center;
+}
+
+#login-form .input-group > input::-webkit-input-placeholder {
+  color: rgba(0,0,0,.5);
+}
+
+.login-card {
+  margin: 0 auto;
+  width: 30rem;
+}
+
+.login-card .input-group {
+  margin: 0 auto;
+  width: 80%;
+  padding-bottom: 10px;
+}
+
+.login-card .input-group > input::-webkit-input-placeholder,
+.login-card .input-group > textarea::-webkit-input-placeholder {
+  color: rgba(0,0,0,.5);
+}
+
+.login-card .form-group {
+  width: 75%;
+  margin: 0 auto;
+  text-align: center;
 }
 

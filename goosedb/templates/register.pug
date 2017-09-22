@@ -1,0 +1,55 @@
+extends layout
+
+block vars
+    - var page = 'register'
+
+block content
+  .container(style='padding-top: 35px;')
+    .card.login-card
+      .card-header.text-center
+        h3 Register to Goose.db
+        if message
+          span.text-danger= message
+      .card-block
+        form#form.form-horizontal(action='/register', method='POST')
+          .input-group
+            span.input-group-addon
+              i.fa.fa-user(style='heigth: 12px; width: 12px;')
+            input#user.form-control(type='text', name='username', value='', placeholder='Username', maxlength='16', pattern='^[a-zA-Z0-9]*$' required)
+          .input-group
+            span.input-group-addon
+              i.fa.fa-envelope(style='heigth: 12px; width: 12px;')
+            input#email.form-control(type='email', name='email', value='', placeholder='Email', maxlength='40', required)
+          .input-group
+            span.input-group-addon
+              i.fa.fa-lock(style='heigth: 12px; width: 12px;')
+            input#password.form-control(type='password', name='password', placeholder='Password', required)
+          .input-group
+            span.input-group-addon
+              i.fa.fa-lock(style='heigth: 12px; width: 12px;')
+            input#password2.form-control(type='password', name='password2', placeholder='Repeat Password', required)
+          .input-group
+            span.input-group-addon
+              i.fa.fa-comments(style='heigth: 12px; width: 12px;')
+            input#discord.form-control(type='text', name='discord', value='', maxlength='40', placeholder='Discord Tag', pattern='.*#[0-9]{4}', required)
+          .input-group
+            span.input-group-addon
+              i.fa.fa-github(style='heigth: 12px; width: 12px;')
+            input#repo.form-control(type='text', name='repository', value='', placeholder='Repository (optional)')
+          .input-group
+            span.input-group-addon
+              i.fa.fa-paypal(style='heigth: 12px; width: 12px;')
+            input#repo.form-control(type='text', name='paypal', value='', placeholder='Paypal Email (optional)')
+          .input-group
+            span.input-group-addon
+              i.fa.fa-picture-o(style='heigth: 12px; width: 12px;')
+            input#img.form-control(type='text', name='image', value='', placeholder='Profile Image URL (optional)')
+          .input-group(style='display: block;')
+            textarea#bio.form-control(name='bio', value='', rows='5', placeholder='Write about yourself.', maxlength='120', style='resize: none; width: 100%; margin-bottom: 16px;')
+          .form-group
+            .col-sm-12.controls
+              button.btn.btn-primary(type='submit')
+                i.fa.fa-sign-in(style='padding-right: 5px;')
+                | Register
+      .card-footer.text-center.text-muted  
+        span Goosedb, TERA mods database, created by Saegusa 2017.

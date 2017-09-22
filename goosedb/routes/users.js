@@ -2,20 +2,25 @@ var model = require('../models');
 
 module.exports = function(app, passport) {
 
+  /*
   app.get('/login', (req, res) => {
     if(req.user) res.redirect('/');
     else
       res.render('login', { title: 'Login', message: req.flash('loginMessage')});
   })
+  */
 
   app.post('/login', passport.authenticate('login', {
     successRedirect: '/mods',
-    failureRedirect: '/login',
+    failureRedirect: '/mods',
     failureFlash: true
   }))
 
   app.get('/register', (req, res) => {
-    res.render('register', { title: 'Register', message: req.flash('registerMessage')});
+    if(req.user) res.redirect('/mods');
+    else {
+      res.render('register', { title: 'Register', message: req.flash('registerMessage')});
+    }
   })
 
   app.post('/register', passport.authenticate('register', {
@@ -26,15 +31,16 @@ module.exports = function(app, passport) {
 
   app.get('/logout', (req, res) => {
     req.logout();
-    res.redirect('/');
+    req.flash('modlistMessage', 'Logged out successfully.');
+    res.redirect('/mods');
   })
 
   app.get('/users', (req, res) => {
-    res.render('users', { title: 'Userlist', message: req.flash('userlistMessage') });
+    res.render('users', { title: 'Userlist', message: req.flash('userlistMessage'), user: req.user });
   })
 
   app.get('/profile', isLoggedIn, (req, res) => {
-    res.render('user', { title: req.user.username, render: req.user, message: req.flash('profileMessage') });
+    res.render('user', { title: req.user.username, render: req.user, message: req.flash('profileMessage'), user: req.user});
   })
 
   app.get('/user', (req, res) => {
@@ -43,13 +49,12 @@ module.exports = function(app, passport) {
   })
 
   app.get('/user/:uid', (req, res) => {
-    model.User.findOne({ _id: req.params.uid }, (err, user) => {
-      if(err) throw err;
-      if(!user) {
+    model.User.findOne({ _id: req.params.uid }, { password: 0 }, (err, user) => {
+      if(err || !user) {
         req.flash('userlistMessage', 'Requested user could not be found or is banned.');
         res.redirect('/users');
       } else
-        res.render('user', { title: user.username, render: user, message: req.flash('userMessage') });
+        res.render('user', { title: user.username, render: user, message: req.flash('userMessage'), user: req.user });
     })
   })
 

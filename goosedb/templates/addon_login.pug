@@ -1,0 +1,23 @@
+#login-modal.modal.fade(tabindex='-1', role='dialog', aria-labelledby="loginModal", aria-hidden="true")
+  .modal-dialog(role='document')
+    .modal-content
+      .modal-header
+        h5.modal-title Login to Goose.db
+        button.close(type='button', data-dismiss='modal')
+          span(aria-hidden='true') &times;
+      .modal-body
+        form#login-form.form-horizontal(action='/login', method='POST')
+          .input-group
+            span.input-group-addon
+              i.fa.fa-user(style='heigth: 12px; width: 12px;')
+            input#user.form-control(type='text', name='username', value='', placeholder='Username')
+          .input-group
+            span.input-group-addon
+              i.fa.fa-lock(style='heigth: 12px; width: 12px;')
+            input#password.form-control(type='password', name='password', placeholder='Password')
+          .form-group
+            button.btn.btn-primary.pull-right(type='submit', style='cursor: pointer;')
+              i.fa.fa-sign-in(style='padding-right: 5px;')
+              | Login
+      .modal-footer.text-center.figure-caption
+        span Goosedb, TERA mods database, created by Saegusa 2017.
