@@ -1,5 +1,6 @@
 var model = require('../models'),
-  url = require('url')
+  url = require('url'),
+  request = require('request')
 
 module.exports = function(app, passport, ranks) {
 
@@ -53,7 +54,7 @@ module.exports = function(app, passport, ranks) {
               paypal: req.user.paypal || req.body.paypal
             },
             mod.image = req.body.image;
-            mod.body = req.body.readme;
+            mod.body = req.body.readme || (req.body.repository.includes('github') ? 'https://raw.githubusercontent.com/' + req.body.repository.split('.com/')[1] + '/master/README.md' : '');
             mod.download = req.body.download;
             mod.repository = req.body.repository;
             mod.revision = ranks[req.user.rank].roles.indexOf('revMod') > -1 ? 1 : 0;
@@ -96,7 +97,15 @@ module.exports = function(app, passport, ranks) {
           req.flash('modlistMessage', 'This mod is currently under revision or recently submitted, please contact a Moderator if you think this is an error.');
           res.redirect('/mods');
         } else {
-          res.render('mod', { title: mod.name, mod: mod, message: req.flash('modMessage'), user: req.user, ranks: ranks });
+          request(mod.body, (err, data) => {
+            if(err || !data) {
+              req.flash('modMessage', 'Could not retreive README data, due to an internal error.');
+              res.render('mod', { title: mod.name, mod: mod, message: req.flash('modMessage'), user: req.user, ranks: ranks })
+            } else {
+              res.render('mod', { title: mod.name, mod: mod, message: req.flash('modMessage'), user: req.user, ranks: ranks, 
+                body: mod.convertReadmeMarkdown(data.body).replace('<table>', '<table class="table table-striped table-markdown">') });
+            }
+          })
         }
       }
     })

@@ -1,4 +1,5 @@
-var mongoose = require('mongoose');
+var mongoose = require('mongoose'),
+  marked = require('marked');
 
 var modSchema = mongoose.Schema({
   name: String,
@@ -19,5 +20,9 @@ var modSchema = mongoose.Schema({
   revision: Number,
   tags: Array
 })
+
+modSchema.methods.convertReadmeMarkdown = function(readme) {
+  return marked(readme);
+}
 
 module.exports = mongoose.model('Mod', modSchema);

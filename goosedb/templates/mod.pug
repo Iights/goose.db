@@ -4,3 +4,35 @@ block vars
   - var page = 'mod'
 
 block content
+  .row
+    #profile.col-md-3.profile-card
+      .card.rounded
+        img.card-image-top.profile-image(src= mod.image)
+        .card-block
+          h2.card-title= mod.name
+          p.card-text= mod.type + ' | ' + mod.version
+        ul.list-group.list-group-flush
+          li.list-group-item
+            a(href='/user/'+mod.author.id)
+              i.fa.fa-user.fa-fw
+              != mod.author.name
+          if !mod.paid
+            li.list-group-item
+              a(href= mod.repository)
+                i.fa.fa-github.fa-fw
+                != ' ' + mod.repository.split('.com/')[1]
+            if mod.download
+              li.list-group-item
+                a(href= mod.download) 
+                  i.fa.fa-cloud-download.fa-fw
+                  |  Download
+          else
+            li.list-group-item
+              a.paypal-link(href= mod.author.paypal)= mod.author.paypal
+    .col-md-3
+    .col-md-8.profile-body
+      if message
+        p.text-danger= message
+      if body
+        span!= body
+    

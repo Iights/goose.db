@@ -13,13 +13,13 @@
 .repo-link-github:before {
   font-family: FontAwesome;
   content: '\f092';
-  padding-right: 4px;
+  padding-right: 6\px;
 }
 
 .repo-link-bitbucket:before {
   font-family: FontAwesome;
   content: '\f172';
-  padding-right: 4px;
+  padding-right: 6px;
 }
 
 .fav-link:before {
@@ -37,6 +37,18 @@
 .email-link:before {
   font-family: FontAwesome;
   content: '\f0e0';
+  padding-right: 6px;
+}
+
+.download-link:before {
+  font-family: FontAwesome;
+  content: '\f0ed';
+  padding-right: 6px;
+}
+
+.paypal-link:before {
+  font-family: FontAwesome;
+  content: '\f1ed';
   padding-right: 6px;
 }
 
@@ -99,6 +111,16 @@ table.table-staff,
 table.table-user {
   border: 1px solid #ddd;
   font-size: 14px;
+}
+
+table.table-markdown {
+  border: 1px solid #ddd;
+  font-size: 12px;
+}
+
+table.table-markdown th {
+  font-size: 14px;
+  font-weight: bold;
 }
 
 table.table-staff td,
@@ -170,6 +192,13 @@ a.mod-download i {
   padding-left: 5px;
 }
 
+#profile {
+  position: fixed;
+  width: 275px;
+  height: auto;
+  z-index: 1;
+}
+
 .register-card {
   margin: 0 auto;
   width: 30rem;
@@ -198,7 +227,7 @@ a.mod-download i {
 }
 
 .profile-image {
-  max-width: 250px;
+  max-width: 275px;
   max-height: 300px;
   overflow: hidden;
   border-bottom: 1px solid #ddd;
