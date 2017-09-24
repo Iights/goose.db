@@ -9,7 +9,7 @@ var express = require('express'),
   cookieParser = require('cookie-parser'),
   session = require('express-session'),
   helmet = require('helmet'),
-  csrf = require('csurf'),
+  csrf = require('csurf')
 
 var dbConfig = require('./config/database'),
   authConfig = require('./config/auth')
