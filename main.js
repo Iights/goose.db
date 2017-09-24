@@ -16,21 +16,15 @@ var express = require('express'),
 var dbConfig = require('./config/database'),
   authConfig = require('./config/auth')
 
-var ddos = new Ddos({
-  burst: 5,
-  limit: 5 * 6,
-  maxexpiry: 60,
-  errormessage: 'No DDOSing Goose.db plx ty. Now wait 60 seconds like the good person you are.'
-});
-
 var model = require('./goosedb/models')
 
 mongoose.Promise = global.Promise;
-mongoose.connect(dbConfig.url)
+mongoose.connect(dbConfig.url, {
+  useMongoClient: true
+})
 
 app.use(morgan('dev'))
 app.use(cookieParser())
-app.use(ddos.express);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(sanitizer())
@@ -42,7 +36,7 @@ app.set('views', __dirname + '/goosedb/templates')
 app.use(express.static(__dirname + '/goosedb/static'))
 app.set('view engine', 'pug')
 
-app.use(session({ secret: authConfig.secret }))
+app.use(session({ secret: authConfig.secret, resave: false, saveUninitialized: false }))
 app.use(passport.initialize())
 app.use(passport.session())
 app.use(flash())
