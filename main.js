@@ -16,12 +16,7 @@ var express = require('express'),
 var dbConfig = require('./config/database'),
   authConfig = require('./config/auth')
 
-var ddos = new Ddos({
-  burst: 15,
-  limit: 15 * 4,
-  maxexpiry: 30,
-  errormessage: 'No DDOSing Goose.db plx ty. Now wait 30seconds like the good person you are.'
-});
+var ddos = new Ddos();
 
 var model = require('./goosedb/models')
 
