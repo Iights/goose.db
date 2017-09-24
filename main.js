@@ -17,8 +17,8 @@ var dbConfig = require('./config/database'),
   authConfig = require('./config/auth')
 
 var ddos = new Ddos({
-  burst: 20,
-  limit: 10 * 5,
+  burst: 15,
+  limit: 15 * 4,
   maxexpiry: 30,
   errormessage: 'No DDOSing Goose.db plx ty. Now wait 30seconds like the good person you are.'
 });
