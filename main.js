@@ -10,10 +10,18 @@ var express = require('express'),
   cookieParser = require('cookie-parser'),
   session = require('express-session'),
   helmet = require('helmet'),
-  csrf = require('csurf')
+  csrf = require('csurf'),
+  Ddos = require('ddos')
 
 var dbConfig = require('./config/database'),
   authConfig = require('./config/auth')
+
+var ddos = new Ddos({
+  burst: 20,
+  limit: 20 * 5,
+  maxexpiry: 30,
+  errormessage: 'No DDOSing Goose.db plx ty. Now wait 30seconds like the good person you are.'
+});
 
 var model = require('./goosedb/models')
 
@@ -22,6 +30,7 @@ mongoose.connect(dbConfig.url)
 
 app.use(morgan('dev'))
 app.use(cookieParser())
+app.use(ddos.express);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(sanitizer())
