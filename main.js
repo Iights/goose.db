@@ -9,7 +9,7 @@ var express = require('express'),
   cookieParser = require('cookie-parser'),
   session = require('express-session'),
   helmet = require('helmet'),
-  csrf = require('csurf')
+  csrf = require('csurf'),
 
 var dbConfig = require('./config/database'),
   authConfig = require('./config/auth')
@@ -36,7 +36,7 @@ app.use(flash())
 
 app.use(csrf());
 app.use(function(req, res, next) {
-  res.locals.csrftoken = request.csrfToken()
+  res.locals.csrftoken = req.csrfToken()
   next();
 })
 
