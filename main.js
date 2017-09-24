@@ -32,7 +32,10 @@ app.set('view engine', 'pug')
 app.use(session({ secret: authConfig.secret }))
 app.use(lusca({
   csrf: true,
-  csp: { /**/ },
+  csp: { 
+    'default-src': '\'self\'',
+    'img-src': '*'
+   },
   xframe: "SAMEORIGIN",
   p3p: "ABCDEF",
   hsts: {maxAge: 31536000, includeSubDomains: true, preload: true},
