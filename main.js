@@ -5,6 +5,7 @@ var express = require('express'),
   passport = require('passport'),
   flash = require('connect-flash'),
   morgan = require('morgan'),
+  sanitizer = require('express-sanitizer'),
   bodyParser = require('body-parser'),
   cookieParser = require('cookie-parser'),
   session = require('express-session'),
@@ -16,14 +17,22 @@ var dbConfig = require('./config/database'),
 
 var model = require('./goosedb/models')
 
+mongoose.Promise = global.Promise;
 mongoose.connect(dbConfig.url)
 
 require('./config/passport')(passport)
 
 app.use(morgan('dev'))
 app.use(cookieParser())
-app.use(bodyParser())
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(helmet())
+
+app.use(sanitizer())
+app.use((req, res, next) => {
+  req.body.text = req.sanitize(request.body.text);
+  next();
+})
 
 app.set('views', __dirname + '/goosedb/templates')
 app.use(express.static(__dirname + '/goosedb/static'))
@@ -34,10 +43,10 @@ app.use(passport.initialize())
 app.use(passport.session())
 app.use(flash())
 
-app.use(csrf());
-app.use(function(req, res, next) {
+app.use(csrf())
+app.use(function (req, res, next) {
   res.locals.csrftoken = req.csrfToken()
-  next();
+  next()
 })
 
 require('./goosedb/routes')(app, passport)
