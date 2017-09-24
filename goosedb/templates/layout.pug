@@ -60,7 +60,7 @@ html
                   a.dropdown-item(href='/profile')
                     i.fa.fa-user.fa-fw.dd-icon
                     | Profile
-                  if ranks && ranks[user.rank].roles.indexOf('adminAccess') > -1
+                  if ranks && ranks[user.rank].roles.indexOf('panelAccess') > -1
                     a.dropdown-item(href='/admin')
                       i.fa.fa-bar-chart.fa-fw.dd-icon
                       | Admin Panel

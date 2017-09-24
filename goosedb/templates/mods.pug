@@ -52,7 +52,7 @@ block content
         th Download
     tbody
       each mod in list
-        tr
+        tr(class=(mod.revision === 0 ? 'unreviewed' : ''))
           td
             a(href='/mod/'+mod._id)= mod.name
           td

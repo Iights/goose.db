@@ -6,14 +6,16 @@ module.exports = function(app, passport, ranks) {
     res.send('WIP');
   })
 
-  app.get('/admin/users', [hasAccess, isAdmin], (req, res) => {
-
+  app.get('/admin/users', hasAccess, (req, res) => {
+    res.redirect('/admin/mods')
   })
 
   app.get('/admin/mods', hasAccess, (req, res) => {
     model.Mod.find({}, (err, mods) => {
       if(err) throw err;
-      res.render('dashboard_mods', { list: mods});
+      res.render('dashboard_mods', { list: mods.sort((a, b) => {
+        return a.revision - b.revision;
+      }) });
     })
   })
 
@@ -23,12 +25,6 @@ module.exports = function(app, passport, ranks) {
       console.log(data);
     });
   })
-
-  function isAdmin(req, res, next) {
-    if(req.user && req.user.rank === 0)
-      return next();
-    res.redirect('/admin');
-  }
 
   function hasAccess(req, res, next) {
     if(req.user && ranks[req.user.rank].roles.indexOf('panelAccess') > -1)

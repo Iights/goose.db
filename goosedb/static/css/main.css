@@ -103,6 +103,18 @@ table.mod-list > tbody > tr:nth-child(odd):hover {
   background: rgba(0,0,0,.06);
 }
 
+table.mod-list > tbody > tr.unreviewed {
+  background: rgba(235, 235, 0, 0.2)
+}
+
+table.mod-list > tbody > tr.unreviewed:nth-child(odd) {
+  background: rgba(235, 235, 0, 0.3)
+}
+
+table.mod-list > tbody > tr.unreviewed:hover {
+  background: rgba(235, 235, 0, 0.5)
+}
+
 table.mod-list tbody tr td a {
   text-decoration: none;
 }
