@@ -3,12 +3,33 @@ extends layout
 block vars
   - var page = 'mods'
 
+block userScripts
+  script.
+    function searchMods() {
+      var input, filter, table, tr, td, i;
+      input = document.getElementById("search");
+      filter = input.value.toUpperCase();
+      table = document.getElementById("mod-list");
+      tr = table.getElementsByTagName("tr");
+
+      for (i = 0; i < tr.length; i++) {
+        td = tr[i].getElementsByTagName("td")[0];
+        if (td) {
+          if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+            tr[i].style.display = "";
+          } else {
+            tr[i].style.display = "none";
+          }
+        } 
+      }
+    }
+
 block content
 
   if message
     p.return-message.text-center.text-warning= message
 
-  input.mod-search(type='text', onkeyup='searchMods();', placeholder='Search Mods...')
+  input#search.mod-search(type='text', onkeyup='searchMods();', placeholder='Search Mods...')
 
   ul.nav.nav-pills.pull-right
     li.nav-item
@@ -20,7 +41,7 @@ block content
     li.nav-item
       a(href='?t=costume', class=(query && query.t === 'costume' ? 'nav-link active' : 'nav-link')) Costume
 
-  table.table.table-hover.mod-list
+  table#mod-list.table.table-hover.mod-list
     thead
       tr
         th Mod Name

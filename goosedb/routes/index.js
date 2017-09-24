@@ -13,6 +13,9 @@ module.exports = function(app, passport) {
     res.render('about', { title: 'About', ranks: ranks, user: req.user})
   })
 
+  // Admin panel request handler
+  require('./admin')(app, passport, ranks);
+
   // User and Profile rendering handler
   require('./users')(app, passport, ranks);
 

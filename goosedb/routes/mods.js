@@ -7,18 +7,15 @@ module.exports = function(app, passport, ranks) {
   // TODO Sorting
   // Modlist render handling
   app.get('/mods', (req, res) => {
-    let options = {
+    var options = {
       revision: { $gt: 0 }
     };
 
     if(req.query.t && req.query.t !== 'all') 
       options['$where'] = "this.type.toLowerCase() === '" + req.query.t + "'";
 
-    if(req.user) {
-      model.Rank.findOne({ id: req.user.rank }, (err, rank) => {
-        if(err) throw err;
-        if(rank.roles.indexOf('viewUnreviewed') > -1) delete options['revision'];
-      })
+    if(req.user && ranks[req.user.rank].roles.indexOf('viewUnreviewed') > -1) {
+      delete options['revision'];
     }
       process.nextTick(() => {
         model.Mod.find(options, (err, list) => {
@@ -55,7 +52,7 @@ module.exports = function(app, passport, ranks) {
             },
             mod.image = req.body.image;
             mod.body = req.body.readme || (req.body.repository.includes('github') ? 'https://raw.githubusercontent.com/' + req.body.repository.split('.com/')[1] + '/master/README.md' : '');
-            mod.download = req.body.download;
+            mod.download = req.body.download || (req.body.repository.includes('github') ? req.body.repository + '/archive/master.zip' : '');
             mod.repository = req.body.repository;
             mod.revision = ranks[req.user.rank].roles.indexOf('revMod') > -1 ? 1 : 0;
             mod.tags = req.body.tags.trim().split(',');

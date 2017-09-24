@@ -1,0 +1,41 @@
+body {
+  padding-top: 50px;
+}
+
+.sidebar {
+  position: fixed;
+  top: 51px;
+  bottom: 0;
+  left: 0;
+  z-index: 1000;
+  padding: 20px;
+  overflow-x: hidden;
+  overflow-y: auto;
+  border-right: 1px solid #eee;
+}
+
+.sidebar .nav {
+  margin-bottom: 20px;
+}
+
+.sidebar .nav-item {
+  width: 90%;
+}
+
+.table-mods {
+  border: 1px solid #ddd;
+  vertical-align: middle;
+  font-size: 14px;
+}
+
+.table-mods td {
+  vertical-align: middle;
+}
+
+.table-mods select {
+  padding-right: 10px;
+}
+
+.btn {
+  margin-bottom: 10px;
+}

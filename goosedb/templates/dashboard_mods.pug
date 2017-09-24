@@ -1,0 +1,62 @@
+extends dashboard
+
+block vars
+  - var page = 'mods'
+
+block menu
+  ul.nav.nav-pills.flex-column
+    li.nav-item
+      h5.nav-link Actions
+
+block scripts
+  script.
+    function postModRev(event) {
+      var target = event.target || event.srcElement;
+      var mod = target.parentNode.parentNode;
+      var modId = mod.childNodes[2].innerHTML;
+
+      $.post('/admin/mods/rev', {
+        'id' : modId,
+        'rev' : target.value
+      })
+    }
+
+block content
+  table#mod-table.table.table-striped.table-mods
+    thead
+      tr
+        th Type
+        th Name
+        th ID
+        th Author
+        th Version
+        th Repository
+        th Image
+        th Download
+        th Revision
+    tbody
+      each mod in list
+        tr
+          td= mod.type
+          td= mod.name
+          td= mod._id
+          td
+            a(href='/user/'+mod.author.id)= mod.author.name
+          td= mod.version
+          td
+            a(href= mod.repository)
+              i.fa.fa-github.fa-fw
+              | Github
+          td
+            a(href= mod.image)
+              i.fa.fa-picture-o.fa-fw
+              | Image
+          td
+            a(href= mod.download)
+              i.fa.fa-cloud-download.fa-fw
+              | Download
+          td
+            select.form-control(onchange='postModRev(event);')
+              option(value='0', selected= mod.revision === 0) Not Approved
+              option(value='1', selected= mod.revision === 1) Approved
+              option(value='2', selected= mod.revision === 2) NSFW

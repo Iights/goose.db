@@ -4,7 +4,7 @@
     "name" : "Administrator",
     "color" : "#CC0808",
     "roles" : [
-      "adminAccess", "addMod", "revMod", "viewUnreviewed", "sendMessage"
+      "panelAccess", "addMod", "revMod", "viewUnreviewed", "sendMessage"
     ]
   },
   "1" : {
@@ -12,7 +12,7 @@
     "name" : "Moderator",
     "color" : "#077C28",
     "roles" : [
-      "addMod", "revMod", "viewUnreviewed", "sendMessage", "reportBug"
+      "panelAccess", "addMod", "revMod", "viewUnreviewed", "sendMessage", "reportBug"
     ]
   },
   "2" : {

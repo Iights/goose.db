@@ -1,0 +1,38 @@
+doctype html
+html
+  head
+    title Goose.db Dashboard
+    link(rel='stylesheet', href='/css/bootstrap.min.css')
+    link(rel='stylesheet', href='/css/admin.css')
+    link(rel='stylesheet', href='/css/font-awesome.min.css')
+
+    script(src='/js/jquery-3.2.1.min.js')
+    script(src='/js/popper.min.js')
+    script(src='/js/tether.min.js')
+    script(src='/js/bootstrap.min.js')
+    block scripts
+
+    block vars
+      - var page = 'home'
+
+  body
+    nav.navbar.navbar-toggleable-md.navbar-inverse.fixed-top.bg-inverse
+      button.navbar-toggler.navbar-toggler-right.hidden-lg-up(type='button', data-toggle='collapse', data-target='#nav', aria-controls='nav', aria-expanded='false')
+        span.navbar-toggler-icon
+      a.navbar-brand(href='#') Goose.db Dashboard
+      #nav.collapse.navbar-collapse
+        ul.navbar-nav.mr-auto
+          li.nav-item
+            a.nav-link(href='/admin', class=(page === 'home' ? 'active' : '')) Main
+          li.nav-item
+            a.nav-link(href='/admin/mods', class=(page === 'mods' ? 'active' : '')) Mods
+          li.nav-item
+            a.nav-link(href='/admin/users', class=(page === 'users' ? 'active' : '')) Users
+    .container-fluid
+      .row
+        nav.col-md-2.hidden-xs-down.bg-faded.sidebar
+          block menu
+
+        main.col-md-10.offset-md-2.pt-3
+          block content
+        

@@ -3,5 +3,54 @@ extends layout
 block vars
   - var page = 'home'
 
+block userStyles
+  style.
+    .content {
+      font-size: 16px;
+    }
+
 block content
-  span Test
+  .jumbotron
+    h2.display-4 Welcome to Goose.db 2.0
+    p.lead A semi-collaborative project to release an unified modifications index for TERA Online mods and fixes.
+    hr.my-4
+    span.lead.pull-right
+      .btn-group(role='group')
+        a.btn.btn-primary.btn-lg(href='/mods') Mods
+        a.btn.btn-secondary.btn-lg(href='/users') Users
+        a.btn.btn-secondary.btn-lg(href='https://patreon.com/saegusa') Donate
+  h3 How to use Goose.db?
+  hr
+  p Simple. Just head over to the Mods page from the navbar and search for the mod you're looking for. To get the most out of goose.db however
+    | you have to create an account. Users with accounts will get notifications from Moderators and Mod authors when something concerning their 
+    | experience happens, they are also able to create favorites and custom lists for the mods they like. Further features are to be implemented 
+    | to make users able to download their lists as a mod pack completely fixing the frustration of updating all mods manually.
+  br
+  h3 I am an Author/Developer. 
+  hr
+  p That's great. Contact a moderator for the Developer status. And after a brief period of time you will be able to submit your mods to the 
+    | database with your shiny new rank. All developers are required to have valid email addresses and valid discord ID's for the case of user 
+    | support and help is needed. Every developer is responsible of their content on the site. All mods also have a brief period of (currently manual) 
+    | revision before appearing in the index. This is also done by the moderation team.
+  h4 What kind of mods are allowed?
+  p Currently all mod types ranging from proxy scripts, costume and UI modifications are allowed on the site. If you have
+    | something that does not fit this qualification, you can submit them under the "None" tag. Note that all mods submitted under
+    | this tag will require further revisioning by the moderation team.
+  h4 Any restrictions on NSFW or Exploit content?
+  p Exploits are strictly forbidden. The moderation team has low standards on what is considered an exploit so they might not agree with your submission 
+    | and the case might extend to a ban, be careful there. About NSFW, they have their own listing revision ID so users are able to filter out NSFW content 
+    | if they desire so. Meaning, yes. You are allowed to post mods with NSFW content.
+  h4 What about paid modules?
+  p There is a "Seller" rank that allows the indexing of paid modules on the site. The layout content has no download or repository links to said modules. 
+    | however a link to the sellers' paypal address. All inquiries are currently to be done manually but further down the line, there are plans to automate 
+    | inquiries and paid module support. Normal users can not submit issues about paid modules as they can with Free ones. The seller has the right to assign 
+    | the role to their customers so they can submit issues about paid mods through the site. All issues however, like their free module counterparts are public 
+    | and can be viewed by unregistered users too.
+  br
+  h3 I want to help.
+  hr
+  p That's also great. As of now, the moderation team consists of people solely chosen by me, however they have the right to give player the Tester and Developer 
+    | ranks. If your idea of help requires any of those please contact them. Otherwise I do accept donations on my 
+    a(href='https://www.patreon.com/saegusa') Patreon page 
+    | in order to keep the site ad-free. If that does not work however, plans are to switch to a not-too-disturbing ad pattern. Other than that you are always welcome
+    | to submit issues and recommendations about the site via email or discord to me.
