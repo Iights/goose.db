@@ -1,12 +1,11 @@
-var model = require('../models');
+var model = require('../models')
 
-module.exports = function(app, passport) {
-
-  var ranks = require('../../setup/ranks.json');
+module.exports = function (app, passport) {
+  var ranks = require('../../setup/ranks.json')
 
   // Main page rendering handler
   app.get('/', (req, res) => {
-    res.render('index', { title: 'Home', ranks: ranks, user: req.user });
+    res.render('index', { title: 'Home', ranks: ranks, user: req.user })
   })
 
   app.get('/about', (req, res) => {
@@ -14,12 +13,11 @@ module.exports = function(app, passport) {
   })
 
   // Admin panel request handler
-  require('./admin')(app, passport, ranks);
+  require('./admin')(app, passport, ranks)
 
   // User and Profile rendering handler
-  require('./users')(app, passport, ranks);
+  require('./users')(app, passport, ranks)
 
   // Mod and modlist rendering handler
-  require('./mods')(app, passport, ranks);
-
+  require('./mods')(app, passport, ranks)
 }

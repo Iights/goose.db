@@ -7,31 +7,31 @@ var express = require('express'),
   morgan = require('morgan'),
   bodyParser = require('body-parser'),
   cookieParser = require('cookie-parser'),
-  session = require('express-session');
+  session = require('express-session')
 
 var dbConfig = require('./config/database'),
-  authConfig = require('./config/auth');
+  authConfig = require('./config/auth')
 
-var model = require('./goosedb/models');
+var model = require('./goosedb/models')
 
-mongoose.connect(dbConfig.url);
+mongoose.connect(dbConfig.url)
 
 require('./config/passport')(passport)
 
-app.use(morgan('dev'));
-app.use(cookieParser());
-app.use(bodyParser());
+app.use(morgan('dev'))
+app.use(cookieParser())
+app.use(bodyParser())
 
-app.set('views', __dirname + '/goosedb/templates');
-app.use(express.static(__dirname + '/goosedb/static'));
-app.set('view engine', 'pug');
+app.set('views', __dirname + '/goosedb/templates')
+app.use(express.static(__dirname + '/goosedb/static'))
+app.set('view engine', 'pug')
 
-app.use(session({ secret: authConfig.secret }));
-app.use(passport.initialize());
-app.use(passport.session());
-app.use(flash());
+app.use(session({ secret: authConfig.secret }))
+app.use(passport.initialize())
+app.use(passport.session())
+app.use(flash())
 
-require('./goosedb/routes')(app, passport);
+require('./goosedb/routes')(app, passport)
 
-app.listen(port);
-console.log('GooseDB Started on Port: ' + port);
+app.listen(port)
+console.log('GooseDB Started on Port: ' + port)

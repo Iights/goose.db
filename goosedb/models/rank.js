@@ -7,4 +7,4 @@ var rankSchema = mongoose.Schema({
   roles: Array
 })
 
-module.exports = mongoose.model('Rank', rankSchema);
+module.exports = mongoose.model('Rank', rankSchema)

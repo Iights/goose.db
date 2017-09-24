@@ -1,7 +1,6 @@
-var model = require('../models');
+var model = require('../models')
 
-module.exports = function(app, passport, ranks) {
-
+module.exports = function (app, passport, ranks) {
   /*
   app.get('/login', (req, res) => {
     if(req.user) res.redirect('/');
@@ -17,9 +16,9 @@ module.exports = function(app, passport, ranks) {
   }))
 
   app.get('/register', (req, res) => {
-    if(req.user) res.redirect('/mods');
+    if (req.user) res.redirect('/mods')
     else {
-      res.render('register', { title: 'Register', message: req.flash('registerMessage')});
+      res.render('register', { title: 'Register', message: req.flash('registerMessage')})
     }
   })
 
@@ -31,43 +30,46 @@ module.exports = function(app, passport, ranks) {
 
   app.get('/logout', isLoggedIn, (req, res) => {
     model.User.findByIdAndUpdate(req.user._id, { lastOnline: new Date(Date.now()), status: 0 }, (err, user) => {
-      if(err) throw err;
-      req.logout();
-      req.flash('modlistMessage', 'Logged out successfully.');
-      res.redirect('/mods');
+      if (err) throw err
+      req.logout()
+      req.flash('modlistMessage', 'Logged out successfully.')
+      res.redirect('/mods')
     })
   })
 
   app.get('/users', (req, res) => {
     model.User.find({}, (err, users) => {
-      if(err) throw err;
-      res.render('users', { title: 'Userlist', message: req.flash('userlistMessage'), list: users.sort((a, b) => {
-        return a.rank - b.rank;
-      }), ranks: ranks, user: req.user })
+      if (err) throw err
+      res.render('users', { title: 'Userlist',
+        message: req.flash('userlistMessage'),
+        list: users.sort((a, b) => {
+          return a.rank - b.rank
+        }),
+        ranks: ranks,
+        user: req.user })
     })
   })
 
   app.get('/profile', isLoggedIn, (req, res) => {
-    res.render('user', { title: req.user.username, render: req.user, message: req.flash('profileMessage'), user: req.user, ranks: ranks});
+    res.render('user', { title: req.user.username, render: req.user, message: req.flash('profileMessage'), user: req.user, ranks: ranks})
   })
 
   app.get('/user', (req, res) => {
-    if(req.user) res.redirect('/profile');
-    else res.redirect('/users');
+    if (req.user) res.redirect('/profile')
+    else res.redirect('/users')
   })
 
   app.get('/user/:uid', (req, res) => {
     model.User.findById(req.params.uid, { password: 0 }, (err, user) => {
-      if(err || !user) {
-        req.flash('userlistMessage', 'Requested user could not be found or is banned.');
-        res.redirect('/users');
-      } else
-        res.render('user', { title: user.username, render: user, message: req.flash('userMessage'), user: req.user, ranks: ranks });
+      if (err || !user) {
+        req.flash('userlistMessage', 'Requested user could not be found or is banned.')
+        res.redirect('/users')
+      } else { res.render('user', { title: user.username, render: user, message: req.flash('userMessage'), user: req.user, ranks: ranks }) }
     })
   })
 
-  function isLoggedIn(req, res, next) {
-    if(req.isAuthenticated()) return next();
-    res.redirect('/');
+  function isLoggedIn (req, res, next) {
+    if (req.isAuthenticated()) return next()
+    res.redirect('/')
   }
 }

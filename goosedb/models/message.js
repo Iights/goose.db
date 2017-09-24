@@ -8,4 +8,4 @@ var messageSchema = mongoose.Schema({
   read: Boolean
 })
 
-module.exports = mongoose.model('Message', messageSchema);
+module.exports = mongoose.model('Message', messageSchema)
