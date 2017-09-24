@@ -30,23 +30,26 @@ module.exports = function (app, passport, ranks) {
 
   app.get('/logout', isLoggedIn, (req, res) => {
     model.User.findByIdAndUpdate(req.user._id, { lastOnline: new Date(Date.now()), status: 0 }, (err, user) => {
-      if (err) throw err
-      req.logout()
-      req.flash('modlistMessage', 'Logged out successfully.')
-      res.redirect('/mods')
+      if (err) throw err;
+      else {
+        req.logout()
+        req.flash('modlistMessage', 'Logged out successfully.')
+        res.redirect('/mods')
+      }
     })
   })
 
   app.get('/users', (req, res) => {
     model.User.find({}, (err, users) => {
       if (err) throw err
-      res.render('users', { title: 'Userlist',
-        message: req.flash('userlistMessage'),
-        list: users.sort((a, b) => {
-          return a.rank - b.rank
-        }),
-        ranks: ranks,
-        user: req.user })
+      else
+        res.render('users', { title: 'Userlist',
+          message: req.flash('userlistMessage'),
+          list: users.sort((a, b) => {
+            return a.rank - b.rank
+          }),
+          ranks: ranks,
+          user: req.user })
     })
   })
 
@@ -60,7 +63,7 @@ module.exports = function (app, passport, ranks) {
   })
 
   app.get('/user/:uid', (req, res) => {
-    if (req.params.uid.match(/^([0-9]|[a-z])+([0-9a-z]+)$/i)) {
+    if (req.params.uid && req.params.uid.match(/^([0-9]|[a-z])+([0-9a-z]+)$/i)) {
       model.User.findById(req.params.uid, { password: 0 }, (err, user) => {
         if (err || !user) {
           req.flash('userlistMessage', 'Requested user could not be found or is banned.')
