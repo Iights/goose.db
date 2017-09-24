@@ -20,6 +20,7 @@
             span.input-group-addon
               i.fa.fa-bookmark(style='heigth: 12px; width: 12px;')
             input.form-control(type='text', name='name', placeholder='Module Name', required)
+          input(type='hidden', name='_csrf', value= csrftoken)
           .input-group
             span.input-group-addon
               i.fa.fa-code-fork(style='heigth: 12px; width: 12px;')

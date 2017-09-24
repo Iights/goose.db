@@ -11,6 +11,7 @@
             span.input-group-addon
               i.fa.fa-user(style='heigth: 12px; width: 12px;')
             input#user.form-control(type='text', name='username', value='', placeholder='Username')
+          input(type='hidden', name='_csrf', value= csrftoken)
           .input-group
             span.input-group-addon
               i.fa.fa-lock(style='heigth: 12px; width: 12px;')

@@ -20,6 +20,7 @@ block content
             span.input-group-addon
               i.fa.fa-envelope(style='heigth: 12px; width: 12px;')
             input#email.form-control(type='email', name='email', value='', placeholder='Email', maxlength='40', required)
+          input(type='hidden', name='_csrf', value= csrftoken)
           .input-group
             span.input-group-addon
               i.fa.fa-lock(style='heigth: 12px; width: 12px;')
