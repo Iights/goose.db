@@ -9,7 +9,6 @@ var express = require('express'),
   cookieParser = require('cookie-parser'),
   session = require('express-session'),
   helmet = require('helmet'),
-  csrf = require('csurf')
 
 var dbConfig = require('./config/database'),
   authConfig = require('./config/auth')
@@ -30,13 +29,6 @@ app.use(express.static(__dirname + '/goosedb/static'))
 app.set('view engine', 'pug')
 
 app.use(session({ secret: authConfig.secret }))
-app.use(csrf())
-
-app.use(function(req, res, next) {
-  res.locals.csrftoken = req.csrfToken();
-  next();
-})
-
 app.use(passport.initialize())
 app.use(passport.session())
 app.use(flash())
