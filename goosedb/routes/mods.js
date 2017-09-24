@@ -81,31 +81,36 @@ module.exports = function (app, passport, ranks) {
   })
 
   app.get('/mod/:modid', (req, res) => {
-    model.Mod.findById(req.params.modid, (err, mod) => {
-      if (err) throw err
-      if (!mod) {
-        req.flash('modlistMessage', 'The mod with ID:' + req.params.modid + ' was not found in database')
-        res.redirect('/mods')
-      } else {
-        if (mod.revision < 1 && (!req.user || req.user.username !== mod.author.name)) {
-          req.flash('modlistMessage', 'This mod is currently under revision or recently submitted, please contact a Moderator if you think this is an error.')
+    if(req.params.uid.match(/^([0-9]|[a-z])+([0-9a-z]+)$/i)) {
+      model.Mod.findById(req.params.modid, (err, mod) => {
+        if (err) throw err
+        if (!mod) {
+          req.flash('modlistMessage', 'The mod with ID:' + req.params.modid + ' was not found in database')
           res.redirect('/mods')
         } else {
-          request(mod.body, (err, data) => {
-            if (err || !data) {
-              req.flash('modMessage', 'Could not retreive README data, due to an internal error.')
-              res.render('mod', { title: mod.name, mod: mod, message: req.flash('modMessage'), user: req.user, ranks: ranks })
-            } else {
-              res.render('mod', { title: mod.name,
-                mod: mod,
-                message: req.flash('modMessage'),
-                user: req.user,
-                ranks: ranks,
-                body: mod.convertReadmeMarkdown(data.body).replace('<table>', '<table class="table table-striped table-markdown">') })
-            }
-          })
+          if (mod.revision < 1 && (!req.user || req.user.username !== mod.author.name)) {
+            req.flash('modlistMessage', 'This mod is currently under revision or recently submitted, please contact a Moderator if you think this is an error.')
+            res.redirect('/mods')
+          } else {
+            request(mod.body, (err, data) => {
+              if (err || !data) {
+                req.flash('modMessage', 'Could not retreive README data, due to an internal error.')
+                res.render('mod', { title: mod.name, mod: mod, message: req.flash('modMessage'), user: req.user, ranks: ranks })
+              } else {
+                res.render('mod', { title: mod.name,
+                  mod: mod,
+                  message: req.flash('modMessage'),
+                  user: req.user,
+                  ranks: ranks,
+                  body: mod.convertReadmeMarkdown(data.body).replace('<table>', '<table class="table table-striped table-markdown">') })
+              }
+            })
+          }
         }
-      }
-    })
+      })
+    } else {
+      res.redirect('/');
+    }
   })
+
 }

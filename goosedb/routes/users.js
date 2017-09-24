@@ -60,12 +60,16 @@ module.exports = function (app, passport, ranks) {
   })
 
   app.get('/user/:uid', (req, res) => {
-    model.User.findById(req.params.uid, { password: 0 }, (err, user) => {
-      if (err || !user) {
-        req.flash('userlistMessage', 'Requested user could not be found or is banned.')
-        res.redirect('/users')
-      } else { res.render('user', { title: user.username, render: user, message: req.flash('userMessage'), user: req.user, ranks: ranks }) }
-    })
+    if(req.params.uid.match(/^([0-9]|[a-z])+([0-9a-z]+)$/i)) {
+      model.User.findById(req.params.uid, { password: 0 }, (err, user) => {
+        if (err || !user) {
+          req.flash('userlistMessage', 'Requested user could not be found or is banned.')
+          res.redirect('/users')
+        } else { res.render('user', { title: user.username, render: user, message: req.flash('userMessage'), user: req.user, ranks: ranks }) }
+      })
+    } else {
+      res.redirect('/');
+    }
   })
 
   function isLoggedIn (req, res, next) {
