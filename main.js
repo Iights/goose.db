@@ -7,7 +7,9 @@ var express = require('express'),
   morgan = require('morgan'),
   bodyParser = require('body-parser'),
   cookieParser = require('cookie-parser'),
-  session = require('express-session')
+  session = require('express-session'),
+  helmet = require('helmet'),
+  lusca = require('lusca')
 
 var dbConfig = require('./config/database'),
   authConfig = require('./config/auth')
@@ -21,12 +23,23 @@ require('./config/passport')(passport)
 app.use(morgan('dev'))
 app.use(cookieParser())
 app.use(bodyParser())
+app.use(helmet())
 
 app.set('views', __dirname + '/goosedb/templates')
 app.use(express.static(__dirname + '/goosedb/static'))
 app.set('view engine', 'pug')
 
 app.use(session({ secret: authConfig.secret }))
+app.use(lusca({
+  csrf: true,
+  csp: { /**/ },
+  xframe: "SAMEORIGIN",
+  p3p: "ABCDEF",
+  hsts: {maxAge: 31536000, includeSubDomains: true, preload: true},
+  xssProtection: true,
+  nosniff: true,
+  referrerPolicy: 'same-origin'
+}))
 app.use(passport.initialize())
 app.use(passport.session())
 app.use(flash())
