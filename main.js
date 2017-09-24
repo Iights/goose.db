@@ -9,7 +9,7 @@ var express = require('express'),
   cookieParser = require('cookie-parser'),
   session = require('express-session'),
   helmet = require('helmet'),
-  lusca = require('lusca')
+  csrf = require('csurf')
 
 var dbConfig = require('./config/database'),
   authConfig = require('./config/auth')
@@ -30,19 +30,13 @@ app.use(express.static(__dirname + '/goosedb/static'))
 app.set('view engine', 'pug')
 
 app.use(session({ secret: authConfig.secret }))
-app.use(lusca({
-  csrf: true,
-  csp: { 
-    'default-src': '\'self\'',
-    'img-src': '*'
-   },
-  xframe: "SAMEORIGIN",
-  p3p: "ABCDEF",
-  hsts: {maxAge: 31536000, includeSubDomains: true, preload: true},
-  xssProtection: true,
-  nosniff: true,
-  referrerPolicy: 'same-origin'
-}))
+app.use(csrf())
+
+app.use(function(req, res, next) {
+  res.locals.csrftoken = req.csrfToken();
+  next();
+})
+
 app.use(passport.initialize())
 app.use(passport.session())
 app.use(flash())
