@@ -17,11 +17,13 @@ block scripts
 
       $.post('/admin/mods/rev', {
         'id' : modId,
-        'rev' : target.value
+        'rev' : target.value,
+        '_csrf' : document.getElementById('token').value
       })
     }
 
 block content
+  input#token(type='hidden', name='_csrf', value= csrftoken)
   table#mod-table.table.table-striped.table-mods
     thead
       tr

@@ -81,7 +81,7 @@ module.exports = function (app, passport, ranks) {
   })
 
   app.get('/mod/:modid', (req, res) => {
-    if (req.params.uid && req.params.uid.match(/^([0-9]|[a-z])+([0-9a-z]+)$/i)) {
+    if (req.params.modid && req.params.modid.match(/^([0-9]|[a-z])+([0-9a-z]+)$/i)) {
       model.Mod.findById(req.params.modid, (err, mod) => {
         if (err) throw err
         if (!mod) {

@@ -28,7 +28,8 @@ block content
                 a(href='mailto://'+usr.email)= usr.email
               td= usr.discord
               td
-                a.repo-link-github(href= usr.repository)= usr.repository
+                if usr.repository
+                  a.repo-link-github(href= usr.repository)= usr.repository
               case usr.status
                 when 0
                   td.status-offline Offline
