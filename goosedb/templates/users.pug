@@ -29,7 +29,7 @@ block content
               td= usr.discord
               td
                 if usr.repository
-                  a.repo-link-github(href= usr.repository)= usr.repository
+                  a.repo-link-github(href= usr.repository)= usr.repository.split('.com/')[1]
               case usr.status
                 when 0
                   td.status-offline Offline

@@ -61,7 +61,7 @@ block content
           td
             a.mod-author(href='/user/'+mod.author.id)= mod.author.name
           td
-            a.mod-repo(href= mod.repository)= mod.repository
+            a.mod-repo.repo-link-github(href= mod.repository)= mod.repository.split('.com/')[1]
           td
             a.mod-download(href= mod.download)
               i.fa.fa-cloud-download
