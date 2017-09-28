@@ -14,7 +14,7 @@ module.exports = function (app, passport, ranks) {
       if (err) throw err
       res.render('dashboard_mods', { list: mods.sort((a, b) => {
         return a.revision - b.revision
-      }) })
+      }), user: req.user, ranks: ranks })
     })
   })
 

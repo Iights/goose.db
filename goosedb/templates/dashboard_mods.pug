@@ -7,6 +7,10 @@ block menu
   ul.nav.nav-pills.flex-column
     li.nav-item
       h5.nav-link Actions
+    li.nav-item
+      a.nav-link.active(data-toggle='pill', href='#rev', role='tab') Revise Mods
+    li.nav-item
+      a.nav-link(data-toggle='pill', href='#edit', role='tab') Edit Mods
 
 block scripts
   script.
@@ -23,42 +27,71 @@ block scripts
     }
 
 block content
-  input#token(type='hidden', name='_csrf', value= csrftoken)
-  table#mod-table.table.table-striped.table-mods
-    thead
-      tr
-        th Type
-        th Name
-        th ID
-        th Author
-        th Version
-        th Repository
-        th Image
-        th Download
-        th Revision
-    tbody
-      each mod in list
-        tr
-          td= mod.type
-          td= mod.name
-          td= mod._id
-          td
-            a(href='/user/'+mod.author.id)= mod.author.name
-          td= mod.version
-          td
-            a(href= mod.repository)
-              i.fa.fa-github.fa-fw
-              | Github
-          td
-            a(href= mod.image)
-              i.fa.fa-picture-o.fa-fw
-              | Image
-          td
-            a(href= mod.download)
-              i.fa.fa-cloud-download.fa-fw
-              | Download
-          td
-            select.form-control(onchange='postModRev(event);')
-              option(value='0', selected= mod.revision === 0) Not Approved
-              option(value='1', selected= mod.revision === 1) Approved
-              option(value='2', selected= mod.revision === 2) NSFW
+  .tab-content.dashboard-content
+    #rev.tab-pane.fade.show.active(role='tabpanel')
+      input#token(type='hidden', name='_csrf', value= csrftoken)
+      table#mod-table.table.table-striped.table-mods
+        thead
+          tr
+            th Type
+            th Name
+            th ID
+            th Author
+            th Version
+            th Repository
+            th Image
+            th Download
+            th Revision
+        tbody
+          each mod in list
+            tr
+              td= mod.type
+              td= mod.name
+              td= mod._id
+              td
+                a(href='/user/'+mod.author.id)= mod.author.name
+              td= mod.version
+              td
+                a(href= mod.repository)
+                  i.fa.fa-github.fa-fw
+                  | Github
+              td
+                a(href= mod.image)
+                  i.fa.fa-picture-o.fa-fw
+                  | Image
+              td
+                a(href= mod.download)
+                  i.fa.fa-cloud-download.fa-fw
+                  | Download
+              td
+                select.form-control(onchange='postModRev(event);')
+                  option(value='0', selected= mod.revision === 0) Not Approved
+                  option(value='1', selected= mod.revision === 1) Approved
+                  option(value='2', selected= mod.revision === 2) NSFW
+    #edit.tab-pane.fade
+      script.
+        $(document).ready(function() {
+          $('#mod-card').hide();
+        })
+
+        function generateCard() {
+
+        }
+      .container-fluid
+        .row.mod-selector
+          .col-md-3
+            select.form-control
+              each mod in list
+                option(value= mod._id)= mod.name
+          .col-md-2
+            .row
+              span.btn-group
+                button.btn.btn-primary(type='button') Save Changes
+                button.btn.btn-danger(type='button') Delete
+        .row
+          
+        
+
+
+
+  

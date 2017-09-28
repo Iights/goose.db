@@ -28,6 +28,30 @@ html
             a.nav-link(href='/admin/mods', class=(page === 'mods' ? 'active' : '')) Mods
           li.nav-item
             a.nav-link(href='/admin/users', class=(page === 'users' ? 'active' : '')) Users
+        ul.nav.navbar-nav.ml-auto.navbar-profile
+              li.nav-item.dropdown(class=(page === 'profile' ? 'active' : ''))
+                a.nav-link.dropdown-toggle(data-toggle='dropdown', style='cursor: pointer;')= user.username
+                  span.caret
+                .dropdown-menu.dropdown-menu-right
+                  if ranks && ranks[user.rank].roles.indexOf('addMod') > -1
+                    a.dropdown-item(href='#', data-toggle='modal', data-target='#mod-modal')
+                      i.fa.fa-plus.fa-fw.dd-icon
+                      | Add Mod
+                  if ranks && ranks[user.rank].roles.indexOf('reportBug') > -1
+                    a.dropdown-item(href='#', data-toggle='modal', data-target='#bug-modal')
+                      i.fa.fa-bug.fa-fw.dd-icon
+                      | Report an Issue
+                  .dropdown-divider
+                  a.dropdown-item(href='/profile')
+                    i.fa.fa-user.fa-fw.dd-icon
+                    | Profile
+                  a.dropdown-item(href='/profile')
+                    i.fa.fa-cog.dd-icon
+                    | Settings
+                  .dropdown-divider
+                  a.dropdown-item(href='/logout')
+                    i.fa.fa-sign-out.fa-fw.dd-icon
+                    | Logout
     .container-fluid
       .row
         nav.col-md-2.hidden-xs-down.bg-faded.sidebar

@@ -22,6 +22,11 @@ body {
   width: 90%;
 }
 
+.dd-icon {
+  padding-right: 6px;
+  margin-right: 6px;
+}
+
 .table-mods {
   border: 1px solid #ddd;
   vertical-align: middle;
@@ -38,4 +43,32 @@ body {
 
 .btn {
   margin-bottom: 10px;
+}
+
+.dashboard-content {
+  padding: 15px;
+}
+
+.navbar-profile {
+  padding-right: 50px;
+}
+
+.card-block > .row {
+  width: auto;
+  padding: 5px 15px;
+  margin-right: 20px;
+  margin-left: 20px;
+}
+
+.card-block > .row > label {
+  width: 100%;
+}
+
+.mod-card {
+  width: inherit;
+  margin: 15px;
+}
+
+.mod-selector {
+  margin: 5px 15px;
 }
